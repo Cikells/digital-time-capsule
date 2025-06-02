@@ -1,0 +1,41 @@
+<%- include('partials/authHeader') %>
+
+<main class="dashboard-container">
+  <h1>Welcome, <%= user.name %>!</h1>
+  <p>This is your dashboard where you can manage your time capsules.</p>
+
+  <% if (capsules.length === 0) { %>
+    <p>You have no capsules yet. <a href="/capsules/create">Create one now</a>.</p>
+  <% } else { %>
+    <table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Created</th>
+      <th>Unlock Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% capsules.forEach(capsule => { %>
+      <tr>
+        <td><%= capsule.title %></td>
+        <td><%= capsule.created_at.toISOString().split('T')[0] %></td>
+        <td><%= capsule.unlock_date.toISOString().split('T')[0] %></td>
+        <td>
+          <a href="/capsules/<%= capsule.id %>">View</a> |
+          <a href="/capsules/<%= capsule.id %>/edit">Edit</a> |
+          <form action="/capsules/<%= capsule.id %>/delete" method="POST" style="display:inline;">
+  <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+</form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+  <% } %>
+
+  <a href="/capsules/create" class="btn-create">+ Create New Capsule</a>
+</main>
+
+<%- include('partials/authFooter') %>

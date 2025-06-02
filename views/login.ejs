@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<main class="form-container">
+  <% if (successMessage) { %>
+    <div class="success-message"><%= successMessage %></div>
+  <% } %>
+  <h2>Login to Your Account</h2>
+  <form action="/login" method="POST">
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+</main>
+
+<%- include('partials/footer') %>

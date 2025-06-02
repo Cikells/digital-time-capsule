@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<main class="form-container">
+  <h2>Create an Account</h2>
+
+  <% if (typeof error !== 'undefined') { %>
+    <div class="error-message"><%= error %></div>
+  <% } %>
+  
+  <form action="/signup" method="POST" novalidate>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required value="<%= typeof name !== 'undefined' ? name : '' %>">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required value="<%= typeof email !== 'undefined' ? email : '' %>">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <p>Already have an account? <a href="/login">Login here</a></p>
+</main>
+
+<%- include('partials/footer') %>
