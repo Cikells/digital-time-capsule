@@ -1,19 +1,15 @@
 const { Pool } = require('pg');
 require('dotenv').config();
-const { Client } = require('pg');
-const client = new Client({
-  connectionString: process.env.DATABASE_URL, // Use the external URL here
-  ssl: {
-    rejectUnauthorized: false // Adjust SSL settings as necessary
-  }
-});
 
 const pool = new Pool({
   user: process.env.DB_USER,
-  host: 'localhost',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: 5432,
+   ssl: {
+    rejectUnauthorized: false // Adjust SSL settings as necessary
+  }
 });
 
 // Auto-create tables
